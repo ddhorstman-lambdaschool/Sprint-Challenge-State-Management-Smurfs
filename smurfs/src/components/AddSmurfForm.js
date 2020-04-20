@@ -7,11 +7,14 @@ import {
   ButtonGroup,
 } from "@material-ui/core";
 
+import { connect } from "react-redux";
+import { addSmurf } from "../actions";
+
 const initialState = {
-  name: "",
-  age: "",
-  height: "",
-};
+    name: "",
+    age: "",
+    height: "",
+  };
 
 class AddSmurfForm extends React.Component {
   state = initialState;
@@ -21,7 +24,7 @@ class AddSmurfForm extends React.Component {
   };
 
   handleReset = (e) => {
-    e.preventDefault();
+    e && e.preventDefault();
     for (const item in initialState) {
       this.setState({ [item]: initialState[item] });
     }
@@ -29,7 +32,7 @@ class AddSmurfForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    this.props.addSmurf(this.state);
     this.handleReset();
   };
 
@@ -75,4 +78,4 @@ class AddSmurfForm extends React.Component {
     );
   }
 }
-export default AddSmurfForm;
+export default connect(null, { addSmurf })(AddSmurfForm);
