@@ -3,9 +3,10 @@ import SmurfForm from "./SmurfForm";
 
 import { Button, Menu, MenuItem, Container } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 import { connect } from "react-redux";
-import { editSmurf } from "../actions";
+import { editSmurf, deleteSmurf } from "../actions";
 
 function EditSmurfForm(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -14,17 +15,17 @@ function EditSmurfForm(props) {
     setAnchorEl(event.currentTarget);
   };
 
-  const closeDeletMenu = () => {
+  const closeDeleteMenu = () => {
     setAnchorEl(null);
   };
 
   const deleteSmurf = () => {
-    closeDeletMenu();
+    closeDeleteMenu();
     props.deleteSmurf(props.id);
   };
 
   return (
-    <Container style={{padding:"0px"}}>
+    <Container style={{ padding: "0px" }}>
       <SmurfForm
         {...props}
         toggleEditing={props.toggleEditing}
@@ -38,15 +39,21 @@ function EditSmurfForm(props) {
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
-        onClose={closeDeletMenu}
+        onClose={closeDeleteMenu}
       >
-        <MenuItem onClick={closeDeletMenu}>Cancel</MenuItem>
+        <MenuItem onClick={closeDeleteMenu}>
+          <ArrowBackIcon />
+          Cancel
+        </MenuItem>
         <MenuItem color="secondary" onClick={deleteSmurf}>
-        {"Permanently Delete " + props.name}
+          <DeleteIcon />
+          {"Permanently Delete " + props.name}
         </MenuItem>
       </Menu>
     </Container>
   );
 }
 
-export default connect(null, { submitForm: editSmurf })(EditSmurfForm);
+export default connect(null, { submitForm: editSmurf, deleteSmurf })(
+  EditSmurfForm
+);

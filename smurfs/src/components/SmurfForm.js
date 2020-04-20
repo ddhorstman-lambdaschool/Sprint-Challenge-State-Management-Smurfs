@@ -10,14 +10,9 @@ const initialState = {
 };
 
 export default class SmurfForm extends React.Component {
-  state = initialState;
-
-  componentDidMount() {
-    if (this.props.editingExisting) {
-      for (const item in this.props) {
-        this.setState({ [item]: this.props[item] });
-      }
-    }
+  constructor(props) {
+    super(props);
+    this.state = props.editingExisting ? props : initialState;
   }
 
   handleChange = ({ target: { name, value } }) => {
@@ -36,9 +31,7 @@ export default class SmurfForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.submitForm(this.state);
-    this.state.editingExisting
-      ? this.props.toggleEditing()
-      : this.handleReset();
+    this.handleReset();
   };
 
   render() {

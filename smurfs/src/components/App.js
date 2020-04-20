@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css";
 
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
@@ -13,7 +12,7 @@ import { Typography, Container } from "@material-ui/core";
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
-class App extends React.Component {
+export default class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
@@ -26,5 +25,3 @@ class App extends React.Component {
     );
   }
 }
-
-export default App;

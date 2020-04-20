@@ -5,6 +5,7 @@ export const ACTIONS = {
   TOGGLE_FORM_SUBMISSION_LOADING: "TOGGLE_FORM_SUBMISSION_LOADING",
   FETCH_SMURFS: "FETCH_SMURFS",
 };
+
 export const fetchSmurfs = () => (dispatch) => {
   dispatch({ type: ACTIONS.TOGGLE_LOADING });
 
