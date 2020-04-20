@@ -8,6 +8,8 @@ import thunk from "redux-thunk";
 import rootReducer from "../reducers";
 
 import SmurfList from "./SmurfList";
+import AddSmurfForm from "./AddSmurfForm";
+import { Typography, Container } from "@material-ui/core";
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
@@ -15,9 +17,11 @@ class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <div className="App">
+        <Container>
+          <Typography variant="h1">Smurfs!</Typography>
+          <AddSmurfForm />
           <SmurfList />
-        </div>
+        </Container>
       </Provider>
     );
   }
