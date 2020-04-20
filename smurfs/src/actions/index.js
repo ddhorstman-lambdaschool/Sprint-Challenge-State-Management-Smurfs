@@ -15,15 +15,23 @@ export const fetchSmurfs = () => (dispatch) => {
     })
     .then(dispatch({ type: ACTIONS.TOGGLE_LOADING }));
 };
-export const addSmurf = ({name, height, age}) => (dispatch) => {
-    dispatch({type:ACTIONS.TOGGLE_FORM_SUBMISSION_LOADING});
+export const addSmurf = ({ name, height, age }) => (dispatch) => {
+  dispatch({ type: ACTIONS.TOGGLE_FORM_SUBMISSION_LOADING });
 
-    axios.post("http://localhost:3333/smurfs", {
-        name,
-        age,
-        height,
-        id: Date.now()
+  axios
+    .post("http://localhost:3333/smurfs", {
+      name,
+      age,
+      height,
     })
-    .then(() => dispatch({type: ACTIONS.TOGGLE_FORM_SUBMISSION_LOADING}))
-    .then(() => fetchSmurfs());
-}
+    .then((r) => {
+      dispatch({ type: ACTIONS.FETCH_SMURFS, payload: { smurfs: r.data } });
+    })
+    .then(() => dispatch({ type: ACTIONS.TOGGLE_FORM_SUBMISSION_LOADING }));
+};
+
+export const deleteSmurf = (id) => (dispatch) => {
+  axios.delete(`http://localhost:3333/smurfs/${id}`).then((r) => {
+    dispatch({ type: ACTIONS.FETCH_SMURFS, payload: { smurfs: r.data } });
+  });
+};
