@@ -45,7 +45,7 @@ function EditSmurfForm(props) {
           <ArrowBackIcon />
           Cancel
         </MenuItem>
-        <MenuItem color="secondary" onClick={deleteSmurf}>
+        <MenuItem onClick={deleteSmurf}>
           <DeleteIcon />
           {"Permanently Delete " + props.name}
         </MenuItem>

@@ -21,11 +21,9 @@ export default class SmurfForm extends React.Component {
 
   handleReset = (e) => {
     e && e.preventDefault();
-    if (this.state.editingExisting) this.props.toggleEditing();
-    else
-      for (const item in initialState) {
-        this.setState({ [item]: initialState[item] });
-      }
+    this.state.editingExisting
+      ? this.props.toggleEditing()
+      : this.setState(initialState);
   };
 
   handleSubmit = (e) => {
@@ -38,6 +36,7 @@ export default class SmurfForm extends React.Component {
     return (
       <form
         onSubmit={this.handleSubmit}
+        onReset={this.handleReset}
         style={{ display: "flex", flexDirection: "column" }}
       >
         <TextField
@@ -65,7 +64,7 @@ export default class SmurfForm extends React.Component {
           <Button variant="contained" color="primary" type="submit">
             Submit
           </Button>
-          <Button variant="contained" type="reset" onClick={this.handleReset}>
+          <Button variant="contained" type="reset">
             {this.props.editingExisting ? "Cancel" : "Reset"}
           </Button>
         </ButtonGroup>

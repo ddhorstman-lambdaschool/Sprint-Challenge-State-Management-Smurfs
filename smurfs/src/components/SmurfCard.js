@@ -16,15 +16,15 @@ export default function SmurfCard(props) {
   return (
     <Card style={{ minWidth: "25%", margin: "1%" }}>
       <CardContent>
-        {!editing ? (
+        {editing ? (
+          <EditSmurfForm {...props} toggleEditing={toggleEditing} />
+        ) : (
           <>
             <Fab size="small" style={{ float: "right" }}>
               <EditIcon onClick={toggleEditing} />
             </Fab>
             <SmurfInfo {...props} />
           </>
-        ) : (
-          <EditSmurfForm {...props} toggleEditing={toggleEditing} />
         )}
       </CardContent>
     </Card>
