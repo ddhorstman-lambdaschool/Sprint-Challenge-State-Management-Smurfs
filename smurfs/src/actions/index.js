@@ -35,3 +35,11 @@ export const deleteSmurf = (id) => (dispatch) => {
     dispatch({ type: ACTIONS.FETCH_SMURFS, payload: { smurfs: r.data } });
   });
 };
+
+export const editSmurf = ({ name, age, height, id }) => (dispatch) => {
+  axios
+    .put(`http://localhost:3333/smurfs/${id}`, { name, age, height })
+    .then((r) => {
+      dispatch({ type: ACTIONS.FETCH_SMURFS, payload: { smurfs: r.data } });
+    });
+};

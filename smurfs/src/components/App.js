@@ -19,8 +19,8 @@ class App extends React.Component {
       <Provider store={store}>
         <Container>
           <Typography variant="h1">Smurfs!</Typography>
-          <AddSmurfForm />
           <SmurfList />
+          <AddSmurfForm />
         </Container>
       </Provider>
     );
